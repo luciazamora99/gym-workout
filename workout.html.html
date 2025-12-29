@@ -1,0 +1,88 @@
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rutina de Ejercicio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Rutina Semanal</h1>
+  </header>
+
+  <main>
+    
+
+    <section class="day">
+      <h2>Día 1 – Glúteos & Core</h2>
+      <ul>
+        <li data-exercise="hip-thrust">Hip thrust — 4×8–10</li>
+        <li data-exercise="sumo-squat">Sumo squat con mancuerna — 3×11</li>
+        <li data-exercise="step-ups">Step ups en Smith — 3×11</li>
+        <li data-exercise="abducciones">Abducciones con banda o máquina — 3×11</li>
+        <li data-exercise="patada-polea">Patada en polea — 3×12</li>
+        <li data-exercise="plancha">Plancha Frontal — 3×12</li>
+         <li data-exercise="dead-bug">Dead bug— 3×12</li>
+      </ul>
+    </section>
+
+    <section class="day">
+  <h2>Día 2 – Tren Superior</h2>
+  <ul>
+    <li data-exercise="dominadas-asistidas">Dominadas asistidas — 3×4</li>
+    <li data-exercise="pulldown">Pull-down / Jalón al pecho — 3×12</li>
+    <li data-exercise="remo-maquina">Remo en máquina — 3×12</li>
+    <li data-exercise="press-militar">Press militar con mancuernas — 3×10</li>
+    <li data-exercise="machine-fly">Machine Fly / Pec Deck — 3×12</li>
+    <li data-exercise="elevaciones-laterales">Elevaciones laterales en máquina — 3×12</li>
+    <li data-exercise="extension-triceps">Extensión de tríceps en polea — 3×12</li>
+    <li data-exercise="face-pull">Face pull — 3×12</li>
+    <li data-exercise="battle-ropes">Battle ropes — 3×20 seg</li>
+  </ul>
+</section>
+
+<section class="day">
+  <h2>Día 3 – Piernas</h2>
+  <ul>
+    <li data-exercise="leg-press">Leg Press (cuádriceps) — 3×10</li>
+    <li data-exercise="goblet-squat">Goblet squat o Leg Extension — 3×10</li>
+    <li data-exercise="femoral-sentado">Femoral sentado — 3×10</li>
+    <li data-exercise="gemelos">Gemelos sentado / Calf Raises — 3×12</li>
+    <li data-exercise="plancha">Plancha frontal — 3×30 seg</li>
+    <li data-exercise="dead-bug">Dead bug o bird dog — 3×10</li>
+    <li data-exercise="estiramientos">Estiramientos de cadera y columna — 10 min</li>
+  </ul>
+</section>
+
+<section class="day">
+  <h2>Día 4 – Algo que te guste</h2>
+  <p class="free-day">
+    Clase guiada, salir a caminar, movilidad, yoga o actividad recreativa.
+  </p>
+</section>
+
+
+  </main>
+
+<!-- MODAL -->
+<div class="modal" id="exerciseModal">
+  <div class="modal-content">
+    <button class="modal-close" id="closeModal">&times;</button>
+
+    <h3 class="modal-title" id="modalTitle"></h3>
+
+    <div class="modal-gif-container">
+      <img src="" alt="Ejercicio" class="modal-gif" id="modalGif">
+    </div>
+
+    <div class="modal-info" id="modalInfo"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+
+</body>
+</html>
