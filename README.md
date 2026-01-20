@@ -15,7 +15,7 @@ Frontend web application developed to plan weekly gym workouts and view workout 
 - JavaScript
 
 ## Live Demo
-https://tuusuario.github.io/gym-workout/
+https://luciazamora99.github.io/gym-workout/
 
 ## Source Code
 This repository contains the frontend source code of the application.
