@@ -1,307 +1,239 @@
-:root{
-  --bg:#fff;
-  --text:#1b1b1b;
-  --gray:#f5f5f5;
-  --gray2:#cfcfcf;
-  --shadow:rgba(0,0,0,.12);
-  --radius:18px;
-  --primary:#2b2b2b;
-  --accent:#3d3536;
-}
+document.addEventListener("DOMContentLoaded", () => {
 
-*{box-sizing:border-box;}
+  // Resaltar el día actual
+  const dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+  const hoy = new Date().getDay();
 
-body{
-  font-family: 'Montserrat', Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
+  const filas = document.querySelectorAll("tbody tr");
+  filas.forEach(fila => {
+    if (fila.firstElementChild.textContent.toLowerCase() === dias[hoy]) {
+      fila.style.backgroundColor = "#635b5c62";
+      fila.classList.add("hoy");
+    }
+  });
 
-header{
-  position: relative;
-  text-align: center;
-  padding: 60px 20px;
-  box-shadow: 0 10px 30px var(--shadow);
-  border-bottom-left-radius: var(--radius);
-  border-bottom-right-radius: var(--radius);
-  overflow: hidden;
-}
+  // Modal (popup)
+  const modal = document.getElementById("modal");
+  const modalTitle = document.getElementById("modal-title");
+  const modalBody = document.getElementById("modal-body");
+  const closeBtn = document.querySelector(".close-btn");
 
-header .header-bg{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
+  // ---------- RUTINAS ----------
+  const buttonsRutina = document.querySelectorAll(".ver-rutina");
 
-header::after{
-  content:"";
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.65);
-  z-index: 1;
-}
+  const rutinas = {
+    Lunes: {
+      title: "Rutina del Lunes",
+      info: [
+        "1. Hip thrust",
+        "2. Sentadilla búlgara",
+        "3. Femoral sentado",
+        "4. Patada en polea",
+        "5. Patadas de glúteo",
+        "5. Abducción de cadera"
+      ]
+    },
+    Martes: {
+      title: "Rutina del Martes",
+      info: [
+        "1. Dominadas asistidas",
+        "2. Pull-down / Jalón al pecho",
+        "3. Cuerdas ondulatorias (“viborita”)",
+        "4. Chest pass (lanzamiento frontal)",
+        "5. Lanzamiento lateral de pelota",
+        "6. Press de pecho (máquina o mancuernas) – 3×10–12",
+        "7. SkiErg (máquina de esquí) - 10 a 15 min (intervalos o ritmo constante)",
 
-header .header-text{
-  position: relative;
-  z-index: 2;
-}
+        "8. Core seguro:",
+        "a. Plancha frontal 3x20–30s",
+        "b. Plancha lateral 3x20s",
+        "c. Dead bug 3x10s cada lado"
+      ]
+    },
+    Miércoles: {
+      title: "Rutina del Miércoles",
+      info: [
+        "1. Prensa de piernas - 4x12",
+        "2. Extensión de cuádriceps - 3x15",
+        "3. Sentadilla búlgara - 3x12 por pierna",
+        "4. Elevación de talones en máquina - 4x15",
+        "5. Curl femoral sentado- 3x15",
+        "5. Abducciones- 3x15",
 
-header h1{
-  margin: 0;
-  font-family: 'Playfair Display', serif;
-  font-size: 2.6rem;
-  color: #1b1b1b;
-}
+        "5. Core seguro:",
+        "a. Plancha frontal 3x20–30s",
+        "b. Plancha lateral 3x20s",
+        "c. Dead bug 3x10s cada lado",
+        "6. Saltar la cuerda x5 minutos"
+      ]
+    },
+    Jueves: {
+      title: "Rutina del Jueves",
+      info: [
+        "1. Calentamiento 5 min (trote suave o saltos suaves)",
+        "2. Circuito HIIT funcional (4 rondas):",
+        "   - 30s Cuerdas ondulatorias (“viborita”)",
+        "   - 30s Slam de pelota medicinal (o lanzamiento al suelo)",
+        "   - 30s Sentadilla con salto (o sentadilla normal si necesitás)",
+        "   - 30s Mountain climbers (suaves, sin presión abdominal)",
+        "   - 30s descanso",
+        "3. Fuerza (3 rondas):",
+        "   - 10 Flexiones",
+        "   - 10 Fondos en paralelas",
+        "   - 30s Máquina de Ski (SkiErg)",
+        "4. Core seguro (2 rondas):",
+        "   - 30s Plancha frontal",
+        "   - 30s Plancha lateral por lado",
+        "   - 10 Dead bug por lado",
+        "5. Enfriamiento 5 min (estiramiento y respiración)"
+      ]
+    },
+    Viernes: {
+      title: "Rutina del Viernes",
+      info: [
+        "Día opcional, haz lo que quieras"
+      ]
+    }
+  };
 
-header p{
-  margin-top: 8px;
-  font-size: 1.05rem;
-  color: #333;
-}
+  buttonsRutina.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const day = btn.getAttribute("data-day");
+      const rutina = rutinas[day];
 
-table, th, td {
-  font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 1rem;
-}
+      modalTitle.textContent = rutina.title;
 
-header h1::after{
-  content: "";
-  display: block;
-  width: 180px;
-  height: 6px;
-  background: #d1aaaa;
-  margin: 10px auto 0;
-  border-radius: 999px;
-}
+      // Limpiar contenido previo
+      modalBody.innerHTML = "";
 
-/* MENU */
-.menu{
-  background: var(--bg);
-  width:100%;
-  padding:10px 0;
-  box-shadow:0 8px 24px var(--shadow);
-}
+      // Agregar información sin viñetas
+      rutina.info.forEach(line => {
+        const p = document.createElement("p");
+        p.textContent = line;
+        p.classList.add("exercise");
+        modalBody.appendChild(p);
+      });
 
-.menu ul{
-  list-style:none;
-  margin:0;
-  padding:0;
-  display:flex;
-  justify-content:center;
-  gap:18px;
-}
-
-.menu a{
-  color:var(--text);
-  font-weight:700;
-  text-decoration:none;
-  padding:10px 14px;
-  border-radius:999px;
-  transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
-}
-
-.menu a:hover{
-  background: rgba(0,0,0,.08);
-  transform: translateY(-2px);
-  box-shadow:0 6px 18px rgba(0,0,0,.12);
-}
-
-/* TABLA */
-table{
-  width: 85%;
-  max-width: 900px;
-  margin: 40px auto;
-  border-collapse: separate;
-  border-spacing:0;
-  border: 1px solid var(--gray2);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 24px rgba(0,0,0,.10);
-}
-
-th, td{
-  padding: 14px 18px;
-  text-align:left;
-}
-
-th{
-  background:#000;
-  color:#fff;
-  font-weight:700;
-  font-size: 0.95em;
-}
-
-tbody tr{
-  background:var(--gray);
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-
-tbody tr:hover{
-  transform: translateY(-2px);
-  box-shadow:0 10px 24px rgba(0,0,0,.12);
-}
-
-tbody tr.hoy{
-  font-weight: 700;
-}
-
-td{
-  border-bottom: 1px solid var(--gray2);
-}
-
-/* BOTÓN “VER RUTINA” */
-.ver-rutina {
-  background: rgba(61, 53, 54, 0.08);
-  color: #3d3536;
-  padding: 6px 10px;
-  text-decoration: none;
-  border-radius: 999px;
-  font-size: 0.85em;
-  font-weight:600;
-  border: 1px solid rgba(61, 53, 54, 0.25);
-}
-
-.ver-receta {
-  background: rgba(61, 53, 54, 0.08);
-  color: #3d3536;
-  padding: 6px 10px;
-  text-decoration: none;
-  border-radius: 999px;
-  font-size: 0.85em;
-  font-weight:600;
-  border: 1px solid rgba(61, 53, 54, 0.25);
-}
+      modal.style.display = "flex";
+    });
+  });
 
 
-.ver-rutina:hover {
-  background: #d1aaaa;
-}
+  // ---------- RECETAS ----------
+  const buttonsReceta = document.querySelectorAll(".ver-receta");
 
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:22px 12px;
-  background:var(--gray);
-  box-shadow:0 -6px 18px var(--shadow);
-  margin-top:30px;
-  border-top-left-radius: var(--radius);
-  border-top-right-radius: var(--radius);
-}
+  const recetas = {
+    omelette: {
+      title: "Omelette de claras",
+      body: `
+        <h3>Ingredientes</h3>
+        <ul>
+          <li>4 claras</li>
+          <li>1 huevo entero</li>
+          <li>Espinaca</li>
+          <li>Tomate</li>
+          <li>Sal y pimienta</li>
+        </ul>
+        <h3>Preparación</h3>
+        <ol>
+          <li>Batir claras y huevo.</li>
+          <li>Sofreír vegetales.</li>
+          <li>Agregar mezcla y cocinar 3–4 min.</li>
+        </ol>
+      `
+    },
+    ensalada: {
+      title: "Ensalada de pollo",
+      body: `
+        <h3>Ingredientes</h3>
+        <ul>
+          <li>Pechuga de pollo</li>
+          <li>Lechuga, tomate, pepino</li>
+          <li>Aceite de oliva</li>
+          <li>Limón</li>
+        </ul>
+        <h3>Preparación</h3>
+        <ol>
+          <li>Cocinar pollo y cortar en tiras.</li>
+          <li>Mezclar vegetales y agregar pollo.</li>
+          <li>Aliñar con limón y aceite.</li>
+        </ol>
+      `
+    },
+    quinoa: {
+      title: "Bowl de quinoa",
+      body: `
+        <h3>Ingredientes</h3>
+        <ul>
+          <li>Quinoa</li>
+          <li>Verduras</li>
+          <li>Huevo o pollo</li>
+          <li>Aderezo ligero</li>
+        </ul>
+        <h3>Preparación</h3>
+        <ol>
+          <li>Cocinar quinoa.</li>
+          <li>Agregar verduras y proteína.</li>
+          <li>Aliñar y servir.</li>
+        </ol>
+      `
+    },
+    snack: {
+      title: "Snack de yogurt y frutas",
+      body: `
+        <h3>Ingredientes</h3>
+        <ul>
+          <li>Yogurt natural</li>
+          <li>Frutas</li>
+          <li>Semillas (opcional)</li>
+        </ul>
+        <h3>Preparación</h3>
+        <ol>
+          <li>Mezclar yogurt con frutas.</li>
+          <li>Agregar semillas si querés.</li>
+        </ol>
+      `
+    },
+    salmon: {
+      title: "Salmón al horno",
+      body: `
+        <h3>Ingredientes</h3>
+        <ul>
+          <li>Filete de salmón</li>
+          <li>Limón</li>
+          <li>Especias al gusto</li>
+          <li>Verduras al lado</li>
+        </ul>
+        <h3>Preparación</h3>
+        <ol>
+          <li>Hornear salmón 15–20 min a 180°C.</li>
+          <li>Servir con verduras.</li>
+        </ol>
+      `
+    }
+  };
 
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.55);
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
+  buttonsReceta.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const recipeKey = btn.getAttribute("data-recipe");
+      const receta = recetas[recipeKey];
 
-.modal-content {
-  background: #fff;
-  padding: 26px 26px 22px 26px;
-  border-radius: 22px;
-  width: 100%;
-  max-width: 560px;
-  box-shadow: 0 18px 45px rgba(0,0,0,0.18);
-  position: relative;
-  font-family: 'Poppins', Arial, sans-serif;
-}
+      modalTitle.textContent = receta.title;
+      modalBody.innerHTML = receta.body;
 
-.modal h2 {
-  margin: 0;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  color: var(--primary);
-  letter-spacing: 0.5px;
-}
+      modal.style.display = "flex";
+    });
+  });
 
-.modal-title {
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-  margin-bottom: 28px; /* MÁS separación real */
-}
+  // Cerrar modal
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
 
-.modal-body {
-  padding-top: 18px; /* MÁS separación real */
-  font-size: 1rem;
-  color: #333;
-  line-height: 1.75;
-}
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
 
-.modal-body ul {
-  margin: 0;
-  padding-left: 0;
-  list-style: none; /* sin viñetas */
-}
-
-.modal-body p {
-  margin: 0;
-  padding: 0;
-}
-
-.modal-body .exercise {
-  margin-bottom: 10px;
-}
-
-.close-btn {
-  position: absolute;
-  right: 16px;
-  top: 14px;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: #f5f5f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  cursor: pointer;
-  border: 1px solid var(--gray2);
-  transition: transform .2s ease, background .2s ease;
-}
-
-.close-btn:hover {
-  background: #e9e9e9;
-  transform: translateY(-1px);
-}
-
-
-.close-btn:hover {
-  background: #e9e9e9;
-  transform: translateY(-1px);
-}
-
-/* BOTÓN dentro del modal (opcional) */
-.modal-actions {
-  margin-top: 18px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.modal-actions .btn {
-  padding: 8px 14px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 600;
-  border: 1px solid var(--accent);
-  background: rgba(61, 53, 54, 0.08);
-  color: var(--accent);
-  transition: transform .2s ease, background .2s ease;
-}
-
-.modal-actions .btn:hover {
-  background: var(--accent);
-  color: #fff;
-  transform: translateY(-1px);
-}
+});
