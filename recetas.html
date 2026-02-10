@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recetas</title>
+  <title>Rutina Funcional Semanal</title>
 
   <link rel="stylesheet" href="styles.css">
 
@@ -19,6 +19,7 @@
     <ul>
       <li><a href="index.html">Inicio</a></li>
       <li><a href="recetas.html">Recetas</a></li>
+    </ul>
   </nav>
 
   <!-- HEADER -->
@@ -26,7 +27,7 @@
     <img src="img/header.jpg" alt="Fitness Diary" class="header-bg">
     <div class="header-text">
       <h1>Fitness Diary</h1>
-      <p>Recetas saludables para acompañar tu rutina</p>
+      <p>Plan de entrenamiento de Lucía integrado para todo el año</p>
     </div>
   </header>
 
@@ -36,36 +37,36 @@
       <table>
         <thead>
           <tr>
-            <th>Receta</th>
-            <th>Tipo</th>
+            <th>Día</th>
+            <th>Enfoque</th>
             <th>Acción</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Omelette de claras</td>
-            <td>Desayuno</td>
-            <td><a href="javascript:void(0)" class="ver-receta" data-recipe="omelette">Ver receta</a></td>
+            <td>Lunes</td>
+            <td>Glúteos</td>
+            <td><a href="javascript:void(0)" class="ver-rutina" data-day="Lunes">Ver rutina del Lunes</a></td>
           </tr>
           <tr>
-            <td>Ensalada de pollo</td>
-            <td>Almuerzo</td>
-            <td><a href="javascript:void(0)" class="ver-receta" data-recipe="ensalada">Ver receta</a></td>
+            <td>Martes</td>
+            <td>Tren superior</td>
+            <td><a href="javascript:void(0)" class="ver-rutina" data-day="Martes">Ver rutina del Martes</a></td>
           </tr>
           <tr>
-            <td>Bowl de quinoa</td>
-            <td>Comida</td>
-            <td><a href="javascript:void(0)" class="ver-receta" data-recipe="quinoa">Ver receta</a></td>
+            <td>Miércoles</td>
+            <td>Cuádriceps</td>
+            <td><a href="javascript:void(0)" class="ver-rutina" data-day="Miércoles">Ver rutina del Miércoles</a></td>
           </tr>
           <tr>
-            <td>Snack de yogurt y frutas</td>
-            <td>Snack</td>
-            <td><a href="javascript:void(0)" class="ver-receta" data-recipe="snack">Ver receta</a></td>
+            <td>Jueves</td>
+            <td>Funcional + Tren Superior</td>
+            <td><a href="javascript:void(0)" class="ver-rutina" data-day="Jueves">Ver rutina del Jueves</a></td>
           </tr>
           <tr>
-            <td>Salmón al horno</td>
-            <td>Cena</td>
-            <td><a href="javascript:void(0)" class="ver-receta" data-recipe="salmon">Ver receta</a></td>
+            <td>Viernes</td>
+            <td>Opcional</td>
+            <td><a href="javascript:void(0)" class="ver-rutina" data-day="Viernes">Ver rutina del Viernes</a></td>
           </tr>
         </tbody>
       </table>
@@ -77,19 +78,17 @@
     <div class="modal-content">
       <span class="close-btn">&times;</span>
 
-      <!-- TÍTULO -->
       <div class="modal-title">
-        <h2 id="modal-title">Receta</h2>
+        <h2 id="modal-title">Rutina</h2>
       </div>
 
-      <!-- TÍTULO -->
       <div id="modal-body" class="modal-body"></div>
     </div>
   </div>
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2026 Recetas Saludables – Creado por Lucía Zamora</p>
+    <p>© 2026 Rutina Funcional – Creado por Lucía Zamora</p>
   </footer>
 
   <script src="script.js"></script>
